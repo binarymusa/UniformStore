@@ -1,0 +1,24 @@
+
+{% extends 'includes/base.html' %}
+{% block title %}
+  Market_page
+{% endblock %}
+
+{% block content %}
+  <div class=" row text-white p-2 " style="margin: auto 11%;" >
+    <a href="{{url_for('boys_page')}}" class="col-5 ms-5 rounded p-1" id="hb1">
+      <div class="" id="postn">
+        <h2>Boys <br> Wear</h2>
+      </div> 
+      <div class="overlay"></div>
+    </a>
+
+    <a href="{{url_for('girls_page')}}" class="col-5 ms-5 rounded p-1" id="hb2">
+      <div class="" id="postn">
+        <h2>Girls <br> Wear</h2>
+      </div>
+     
+    </a>
+
+  </div>
+{% endblock %}         

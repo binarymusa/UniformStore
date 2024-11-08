@@ -1,0 +1,41 @@
+{% extends 'includes/base.html' %}
+{% block title %}
+    Girlswear_page
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex font-monospace text-white" style="margin: 8vh 11%;">
+    <div class="container row ps-lg-3 ps-sm-0" id="rowcalc">
+      {% for outfit in outfit_by_gender['Female'] %}
+        {% include 'includes/fits_modal.html' %}
+        <div class="col-lg-3 mx-lg-auto m-1" style="border: 2px solid #5959a3">
+          <div class="booking-cards w-100 my-1 text-white">
+            <div class="bg-dark-subtle text-dark m-1" style="height: 220px;">
+              <img class="w-100 h-100" src="{{outfit.image_link}}">                                   
+            </div>
+
+            <div class="booking-card text-center py-4 rounded-1 onhover text-dark">
+              <p><strong>gender:</strong> {{ outfit.gender }} </p>
+              <p><strong>category:</strong> {{ outfit.category }}  </p>
+              <!-- <p><strong>description:</strong> {{ outfit.description }} </p>               -->
+              <p><strong>price:</strong> Ksh. {{ outfit.price }}  </p>
+              
+                <!-- <p class="text-warning"><strong>units:</strong> None </p> -->
+                <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#cartModal{{ outfit.id }}">
+                  Cart +
+                </button>                                      
+
+                <button type="button" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#orderModal{{ outfit.id }}">
+                  Order 
+                </button>                                                                      
+            </div>
+          </div>
+        </div>
+
+        {% if loop.index % 3 == 0 %}
+          </div> <div class="row">
+        {% endif %}
+
+      {% endfor %}
+  </div>
+{% endblock %}      

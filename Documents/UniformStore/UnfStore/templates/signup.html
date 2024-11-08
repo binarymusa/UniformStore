@@ -1,0 +1,33 @@
+
+{% extends 'includes/base.html' %}
+{% block title %}
+    signup_page
+{% endblock %}
+
+{% block content %}
+    <body class="bd">
+        <div id="container" >
+            <a class="navbar-brand" style="color: #5959a3;" href="#">Shop</a>
+            <h2>Signup Form</h2>
+
+            <form id="signupForm" method="POST" action="{{url_for('signup_page')}}">
+                <label for="username">Username:</label>
+                <!-- required property -->
+                <input  type="text" id="username" name="username" required > 
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <P><Strong>Have an account?</Strong></P>
+                <a class="btn bg-secondary text-white" href="{{url_for('login_page')}}">
+                    Login
+                </a>
+                
+                <input type="submit" value="Signup">
+            </form>
+        </div>
+    </body>
+{% endblock %}

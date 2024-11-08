@@ -1,0 +1,29 @@
+
+{% extends 'includes/base.html' %}
+{% block title %}
+    Login_page
+{% endblock %}
+
+{% block content %}    
+    <div id="container">
+        <a class="navbar-brand" href="#">Shop</a>
+        <h2>Login Form</h2>
+        <!-- onsubmit="return validateForm()" -->
+        <form id="loginForm" method="POST" action="{{url_for('login_page')}}" >
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <P><Strong>No account?</Strong></P>
+            <!-- <button class="btn btn-secondary text-white" id="btn-1">Signup</button> -->
+            <a class="btn bg-secondary text-white" href="{{url_for('signup_page')}}">
+                Signup
+            </a>       
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+{% endblock %}
+

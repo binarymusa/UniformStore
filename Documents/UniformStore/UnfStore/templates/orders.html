@@ -1,0 +1,49 @@
+
+{% extends 'includes/base2.html' %}
+{% block title %}
+    Orders_page
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin: 2vh 8%;">
+        <header><h2>Orders </h2></header>
+        {% for outfit in ordered_fit_details %}
+        {% include 'includes/cart2_modal.html' %} 
+            <div class="row justify-content-center p-1 my-1" style="background: #bdbbbb;">            
+                <div class="container col-lg-1 col-md-6 text-center"> 
+                    <img class="w-75 h-50" src="{{outfit.fit_image}}">                                     
+                </div>
+                <div class="container col-lg-1 col-md-6 text-center">  
+                    <h6><strong>TOTAL</strong></h6>             
+                    <p>ksh. {{outfit.price}} </p>                
+                </div>
+                <div class="container col-lg-2 col-md-6 text-center">  
+                    <h6><strong>DATE</strong></h6>                  
+                    <p> </p>                
+                </div>
+                <div class="container col-lg-1 col-md-6 text-center">
+                    <h6><strong>PAID</strong></h6>  
+                    <p>false </p>
+                </div>
+                <div class="container col-lg-2 col-md-6 text-center"> 
+                    <h6><strong>PAID AT</strong></h6> 
+                    <p> </p>
+                </div>
+                <div class="container col-lg-1 col-md-6 text-center"> 
+                    <h6><strong>DELIVERED</strong></h6> 
+                    <p>false </p>
+                </div>
+                <div class="container col-lg-1 col-md-6 text-center"> 
+                    <button class="btn mb-1 bg-danger me-2" href="" data-bs-toggle="modal" data-bs-target="#removefitModal{{ outfit.id }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="dark" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-danger">No orders found.</p>
+        {% endfor %}
+    </div> 
+{% endblock %}

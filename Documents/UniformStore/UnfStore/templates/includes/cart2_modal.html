@@ -1,0 +1,26 @@
+
+<!-- remove from orders -->
+<div class="modal fade " id="removefitModal{{ outfit.id }}" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content  text-white text-monospace" style="background: #928f8f;">
+        <div class="modal-header">
+          <h5 class="modal-title " id="removefitModalLabel{{ outfit.id }}">Remove from orders</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">          
+          remove {{outfit.description}} from order?                
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+          <form method="post" action="{{url_for('my_orders')}}">
+            <input id="remove_order" name="remove_order" type="hidden" value="{{outfit.id}}">
+            <button type="submit" class="btn btn-danger">Remove</button>
+          </form>
+  
+        </div>
+    </div>
+  </div>
+  </div>

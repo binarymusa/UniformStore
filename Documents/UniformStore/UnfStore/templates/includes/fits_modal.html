@@ -1,0 +1,81 @@
+
+<!-- order modal -->
+<div class="modal fade " id="orderModal{{ outfit.id }}" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content  text-white" style="background: #928f8f;">
+        <div class="modal-header">
+          <h5 class="modal-title " id="orderModalLabel{{ outfit.id }}">Order Confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">          
+          Are you sure you want to order {{outfit.category}} for $ ?        
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form method="post" action="{{url_for('boys_page')}}">
+            <input id="order_fit" name="order_fit" type="hidden" value="{{outfit.id}}">  
+            <button type="submit" class="btn btn-primary">Add order</button>
+          </form>
+          <!-- <a  class="btn bg-success text-white mb-2" href="">
+            order
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- cart_modal -->
+<div class="modal fade " id="cartModal{{ outfit.id }}" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content  text-white" style="background: #928f8f;">
+      <div class="modal-header">
+        <h5 class="modal-title " id="cartModalLabel{{ outfit.id }}">Add to cart...</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">          
+        {{outfit.description}} for $ {{outfit.price}}                                 
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+        <form method="post" action="{{url_for('boys_page')}}">
+          <input id="added_fit" name="added_fit" type="hidden" value="{{outfit.id}}">
+
+          <button type="submit" class="btn btn-primary">Add to cart</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- delete_vehicles modal -->
+<div class="modal fade " id="deletefitModal{{ outfit.id }}"  tabindex="-1" aria-labelledby="deleteVehicleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content  text-white" style="background: #928f8f;">
+      <div class="modal-header">
+        <h5 class="modal-title " id="deletefitModalLabel{{ outfit.id }}">Delete Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">          
+        Permanently delete {{outfit.description}} from database ?       
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+        <form method="post" action="{{url_for('cart_page')}}">
+          <input id="outfit_delete" name="outfit_delete" type="hidden" value="{{outfit.id}}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

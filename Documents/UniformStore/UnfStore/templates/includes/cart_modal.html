@@ -1,0 +1,54 @@
+
+<!-- order -->
+<div class="modal fade " id="orderModal{{ outfit.id }}" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content  text-white text-monospace" style="background: #928f8f;">
+        <div class="modal-header">
+          <h5 class="modal-title " id="orderModalLabel{{ outfit.id }}">Purchase confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">          
+            Purchase {{outfit.model}} for  ${{outfit.price}} ? 
+                   
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+          <form method="post" action="{{url_for('cart_page')}}">
+            <input id="order_added_fit" name="order_added_fit" type="hidden" value="{{outfit.id}}">
+            <button type="submit" class="btn btn-primary">Purchase</button>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!-- remove from cart -->
+<div class="modal fade " id="removefitModal{{ outfit.id }}" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content  text-white text-monospace" style="background: #928f8f;">
+        <div class="modal-header">
+            <h5 class="modal-title " id="removefitModalLabel{{ outfit.id }}">Remove from cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">          
+            remove {{outfit.description}} from cart?                
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            
+            <form method="post" action="{{url_for('cart_page')}}">
+              <input id="remove_added_fit" name="remove_added_fit" type="hidden" value="{{outfit.id}}">
+              <button type="submit" class="btn btn-danger">Remove</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,214 @@
+/* -        -   common PAGE CSS    -       - */
+.nav-item a{
+    color: black;
+    color: #271e1eb7;
+}
+.cust-m{
+    margin-left: 3%;
+}
+#navbarNav{
+    background: #5959a3;
+    /* margin-left: px; */
+}
+
+#smallnav{
+    text-align: end;
+}
+.detls{
+    color: black;
+    padding: 15px;
+    margin: 3px ;
+    text-align: center;
+    /* justify-content: center; */
+}
+.detls2{
+    padding: 3px;
+}
+
+#seccalc{
+    margin-left: 55px;
+}
+#shadow h4 strong{
+    text-shadow: 0 0 2px  #f0f8ff; /* Horizontal offset, vertical offset, blur radius, and color */
+}
+#tagspc a{
+    margin: 10%;
+}
+
+/* -        -   market.html PAGE CSS    -       - */
+.bd{
+    background: rgb(39, 38, 38);
+    font-family: monospace;
+}
+/* .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  Black overlay with 50% opacity 
+    z-index: 1;  Ensure overlay is above the background 
+} */
+
+/* .content {
+    position: relative;
+    z-index: 5;  Ensure content is above the overlay 
+    padding: 20px;  Add some padding 
+} */
+
+#lnk{
+    color: lightskyblue;
+}
+#filtered{
+    animation: lightup 10s linear 2;
+}
+#one .dropdown-item{
+    border-radius: 3px;
+}
+#tt:hover{
+    background: rgb(221, 99, 99);
+}
+
+/* -        -   login & signup PAGE CSS    -       - */
+#container {
+    width: 300px;
+    margin: 8vh auto;
+    padding: 30px;
+    border: 1px solid #5959a3;
+    background-color: rgba(255, 255, 255, 0.92);
+}
+#container2 {
+    width: 50%;
+    margin: 2vh auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.92);
+}
+input[type="text"], input[type="number"], input[type="url"], textarea, input[type="email"], input[type="password"], input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #5959a3ee;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    background-color: #5959a3ee;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #5959a3;
+    /* color: #46ad5cc9; */
+}
+.fixed-large{
+    position: fixed;
+}
+.onhover:hover{
+    box-shadow: 0 0 10px  whitesmoke;
+}
+.onhover2{
+    box-shadow: 0 0 10px  whitesmoke;
+}
+
+/* -        -   market.html FORM CSS    -       - */
+
+#mainContent{
+    margin-left: 175px;
+}
+#hb1, #hb2{
+    height: 85vh;
+    border: 1px solid #5959a3;
+    text-decoration: none;
+    color: black;    
+}
+#hb1:hover, #hb2:hover{
+    background: #848499;
+}
+#light1, #light2{
+    box-shadow: none;
+    transition: box-shadow 0.2s linear
+}#light1.new{
+    background: #2b2a33;
+    border-radius: 3px;
+}
+#light2.new{
+    background: #be828c;
+    border-radius: 3px;
+}
+#postn{
+    background: #888888;
+    transform: translateY(459px);
+    text-align: right;
+}
+#bodyclr{
+    background-color: rgb(233, 231, 227);
+}
+#bodyclr.white{
+    background-color: rgb(224, 224, 224);
+    color: black;
+}
+
+/* -        -   payment.html FORM CSS    -       - */
+.payment-form {
+    background-color: #fff;
+    border-radius: 8px;
+    margin: auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 1000px;
+}
+.payment-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+.payment-form .form-group {
+    margin-bottom: 15px;
+}
+.payment-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+.payment-form .form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.payment-form .form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.payment-form .form-group .small-input {
+    width: calc(50% - 5px);
+    display: inline-block;
+    margin-right: 10px;
+}
+.payment-form .form-group .small-input:last-child {
+    margin-right: 0;
+}
+.payment-form button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.payment-form button:hover {
+    background-color: #45a049;
+}

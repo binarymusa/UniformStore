@@ -1,0 +1,56 @@
+{% extends 'includes/base2.html' %}
+{% block title %}
+    Orders_page
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex font-monospace" style="margin: 2vh 11%;" >
+        <div class="row container p-1 mx-auto" style="text-align: top; " >
+            <header><h2>Cart </h2></header>
+            {% for outfit in cart_fit_details %}
+            {% include 'includes/cart_modal.html' %} 
+                <article class="col-9 mb-2" style="height:min-content;">                   
+                    <article class="border-top border-black" style="background: #bdbbbb">
+                        <a href="" class="row detls text-decoration-none">
+                            <div class="container col-lg-2 text-dark ">
+                                <img class="w-75 h-50" src="{{outfit.outfit_image}}">                                     
+                            </div>
+                            <div class="container col-lg-7">{{outfit.description }} </div>
+                            <div class="container col-lg-2"> ksh. {{outfit.price}} </div>
+                        </a>
+                        <footer class="px-3" style="text-align: end;">
+                            <form action=""></form>
+                            <button class="btn mb-1 bg-danger me-2" href="" data-bs-toggle="modal" data-bs-target="#removefitModal{{ outfit.id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="dark" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                            </button>
+                        </footer>   
+                    </article>
+                </article>
+            {% else %}
+                <p class="text-danger">No cart items found.</p>
+            {% endfor %}
+
+
+                <article class="col-3" style="position: absolute; top: 25vh; right: 6%; ">
+                    <div class="detls2" style="background: #bdbbbb; width:fit-content">
+                        <h4>Cart summary</h4>
+                        <div class="border-top border-dark text-center">
+                            <p >Subtotal</p>
+                            <p>Ksh.   </p>
+                        </div> 
+                        <footer class="border-top border-dark">
+                            <form action="">
+                                <button type="button" class="btn border border-2 border-secondary my-2 mx-5" data-bs-toggle="modal" data-bs-target="#orderModal" id="seccalc">
+                                    Place order
+                                </button>
+                            </form>
+                           
+                        </footer>                      
+                    </div>
+                </article>            
+        </div>
+    </div>
+{% endblock %}
