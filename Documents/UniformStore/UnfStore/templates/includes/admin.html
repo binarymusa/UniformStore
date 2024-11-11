@@ -1,0 +1,175 @@
+{% extends 'includes/base3.html' %}
+{% block title %}
+admin_page
+{% endblock %}
+
+{% block content %}
+
+<div class="row d-flex text-dark text-center container-fluid mx-auto">
+
+    <div class="col-lg-6 overflow-x-auto-md overflow-y-scroll" id="veh" style="left: 0;">
+        <div class="container-fluid ">
+            <h4>outfits Database</h4>
+            <div>
+                <table class="container table table-bordered table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Outfit ID</th>
+                            <th>Outfit category</th>
+                            <th>Outfit image</th>                            
+                            <th>Outfit price(Ksh.)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for outfit in outfit_by_gender['Male'] %}
+                        {% include 'includes/delete_outfit.html' %}
+                        <tr class="text-center">
+                            <td>{{ outfit.id }}</td>
+                            <td>{{ outfit.category }}</td>
+                            <td><img class="w-25 h-25 rounded-2" src="{{outfit.image_link}}"> </td>                            
+                            <td>{{ outfit.price }}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#deleteOutfitModal{{ outfit.id }}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        <a class="btn bg-secondary mb-2 text-white" href="">
+                            Add outfit
+                        </a>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <table class="container table table-bordered table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Outfit ID</th>
+                            <th>Outfit category</th>
+                            <th>Outfit image</th>                            
+                            <th>Outfit price(Ksh.)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for outfit in outfit_by_gender['Female'] %}
+                        {% include 'includes/delete_outfit.html' %}
+                        <tr class="text-center">
+                            <td>{{ outfit.id }}</td>
+                            <td>{{ outfit.category }}</td>
+                            <td><img class="w-25 h-25 rounded-2" src="{{outfit.image_link}}"> </td>                            
+                            <td>{{ outfit.price }}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#deleteOutfitModal{{ outfit.id }}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-6 sm-positon" style="margin-left: auto;">
+        <h4 class="mt-3-sm">Users Database</h4>
+
+        <div class="container-fluid overflow-x-auto">
+            <table class="container table table-bordered table-hover w-50 ">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in query_items[0] %}
+                    {% include 'includes/update_dbs.html' %}
+                    <tr class="text-center">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email_address }}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal"
+                                data-bs-target="#deleteUserModal{{user.id}}">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div>
+                <button type="button" class="btn btn-secondary disabled mb-2" id="addUser">
+                    Add user
+                </button>
+            </div>
+        </div>
+
+        <div class="container-fluid mt-5">
+            <h4>User_cart_items Database</h4>
+
+            <div>
+                <table class="container table table-bordered table-striped w-50">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Outfit ID</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for user in query_items[1] %}
+                        <tr class="text-center">
+                            <td>{{ user.user_id }}</td>
+                            <td>{{ user.outfit_id }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container-fluid mt-5">
+            <h4>User_Purchases Database</h4>
+
+            <div>
+                <table class="container table table-bordered table-striped w-50">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Outfit ID</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for user in query_items[2] %}
+                        <tr class="text-center">
+                            <td>{{ user.user_id }}</td>
+                            <td>{{ user.outfit_id }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+{% endblock %}

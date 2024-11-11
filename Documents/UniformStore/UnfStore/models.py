@@ -49,7 +49,7 @@ class User(db.Model, UserMixin):
     
     # method to set the admin budget to 0
     # static methods don't have access to the instance (self) or class (cls) objects.
-    """ @staticmethod
+    @staticmethod
     def Admin_budget():
         users = User.query.filter_by(user_role=1).all()
         
@@ -70,19 +70,19 @@ class User(db.Model, UserMixin):
             # Subquery to select vehicle IDs owned by the user
             # A subquery is simply a nested query. can be used in another query
             subquery = db.session.query(Cart.id).filter_by(user_id=user_id).union(
-                db.session.query(PurchasedItems.id).filter_by(user_id=user_id)
+                db.session.query(Orders.id).filter_by(user_id=user_id)
             ).subquery()
             
-            # Delete related records from Cart and PurchasedItems tables and disassociate vehicles
+            # Delete related records from Cart and Orders tables and disassociate vehicles
             Cart.query.filter(Cart.id.in_(subquery)).delete(synchronize_session=False)
-            PurchasedItems.query.filter(PurchasedItems.id.in_(subquery)).delete(synchronize_session=False)
+            Orders.query.filter(Orders.id.in_(subquery)).delete(synchronize_session=False)
 
             # Now you can safely delete the user
             db.session.delete(user)
             db.session.commit()
             return True
         else:
-            return False """
+            return False
 
 # User roles database
 class Roles(db.Model):
@@ -147,7 +147,7 @@ class Orders(db.Model):
     #     user = User.query.get(user_id)
 
     #     if user:
-    #         items = PurchasedItems.query.filter_by(user_id=user_id).all()
+    #         items = Orders.query.filter_by(user_id=user_id).all()
     #         db.session.delete(items)
     #         db.session.commit()
     

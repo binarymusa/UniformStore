@@ -1,0 +1,25 @@
+
+<!-- delete_vehicles modal -->
+<div class="modal fade " id="deleteOutfitModal{{ outfit.id }}"  tabindex="-1" aria-labelledby="deleteVehicleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content  text-white" style="background: #928f8f;">
+        <div class="modal-header">
+          <h5 class="modal-title " id="deleteOutfitModalLabel{{ outfit.id }}">Delete Confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">          
+          Permanently delete {{outfit.model}} from database ?                   
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+          <form method="post" action="{{url_for('admin_page')}}">
+            <input id="outfit_delete" name="outfit_delete" type="hidden" value="{{outfit.id}}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>

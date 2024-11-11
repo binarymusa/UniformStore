@@ -21,7 +21,7 @@ def login_page():
          #  Access the associated role object via the role relationship
          if check_user.role and check_user.role.role_name == 'Admin':
             flash(f'Admin Login successful', category='success')
-            return redirect(url_for('admin_welcome'))
+            return redirect(url_for('admin_page'))
          else:
             flash(f'Login successful', category='success')
             time.sleep(2)
@@ -71,22 +71,28 @@ def signup_page():
    else:
       return render_template('signup.html')
 
-""" @app.route('/Admin_welcome_page')
-def admin_welcome():
-   return render_template('includes/welcome_adm.html')
+# @app.route('/Admin_welcome_page')
+# def admin_welcome():
+#    return render_template('includes/welcome_adm.html')
 
 @app.route('/Admin_page', methods=['GET' , 'POST'])
 @login_required
 def admin_page():   
-   # '|' , or_ - represents 'or' logical operator
-   # check for users with roles other than 1 and null roles and pass them to query for display
-   # users = User.query.filter((User.user_role != 1) | (User.user_role == None)).all()
-   query_items = (
-      User.query.filter(or_(User.user_role != 1 , User.user_role == None)).all(),
-      Cart.query.all(), 
-      Orders.query.all(), 
-      Outfits.query.all()
-   )
+   if request.method == 'GET':
+      # '|' , or_ - represents 'or' logical operator
+      # check for users with roles other than 1 and null roles and pass them to query for display
+      # users = User.query.filter((User.user_role != 1) | (User.user_role == None)).all()
+      query_items = (
+         User.query.filter(or_(User.user_role != 1 , User.user_role == None)).all(),
+         Cart.query.all(), 
+         Orders.query.all(), 
+         Outfits.query.all()
+      )
+      fits = ['Male', 'Female']
+
+      # Using dictionary comprehension to store the results for each car type
+      outfit_by_gender = {gfit: Outfits.query.filter_by(gender=gfit).all() for gfit in fits}
+      print(outfit_by_gender)
 
    if request.method == 'POST':
       user_to_delete = request.form.get('user_delete')
@@ -108,9 +114,9 @@ def admin_page():
          else:
             flash('deletion unsuccesful', category='danger')
 
-   return render_template('admin.html', query_items = query_items )
+   return render_template('includes/admin.html', query_items = query_items, outfit_by_gender=outfit_by_gender )
 
-@app.route('/Admbook_page', methods=['GET' , 'POST'])
+"""@app.route('/Admbook_page', methods=['GET' , 'POST'])
 @login_required
 def admin_page2():    
    return render_template('adm_book.html') """
@@ -216,7 +222,6 @@ def cart_page():
             'description': outfit.description,            
             'outfit_image': outfit.image_link
          })
-
       Subtotals = sum(item.get('price', 0) for item in cart_fit_details)
 
    if request.method == 'POST':
