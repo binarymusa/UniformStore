@@ -116,47 +116,6 @@ def admin_page():
 
    return render_template('includes/admin.html', query_items = query_items, outfit_by_gender=outfit_by_gender )
 
-"""@app.route('/Admbook_page', methods=['GET' , 'POST'])
-@login_required
-def admin_page2():    
-   return render_template('adm_book.html') """
-
-""" @app.route('/splash_page')
-def splash_page():
-   return render_template('includes/splash.html') """
-
-""" @app.route('/AddVehicle_page', methods=['GET' , 'POST'])
-def add_vehicle_page():
-   if request.method == 'POST':
-      items = [
-         request.form['price'], request.form['description'],
-         request.form['model'], request.form['type'], request.form['link'], 
-         request.form['units'], request.form['year']
-      ]
-      print(items[5])
-      print(0>int(items[5]))
-
-      if items:
-         reg_exp = '^\d{4}$'
-         try:
-            if (not(re.search(reg_exp, items[6]))):
-               flash('invalid year or car units!',category='danger')
-               return(redirect(url_for('add_vehicle_page')))
-            else:
-               new_vehicle = Outfits(
-                  price=items[0], description=items[1],
-                  model=items[2], car_type=items[3], 
-                  image_link=items[4], vehicle_units=items[5], 
-                  year=items[6]
-               ) 
-               db.session.add(new_vehicle)
-               db.session.commit()
-               return redirect(url_for('admin_page'))
-         except:
-            flash('An error occurred!', category='danger')
-   else:
-      return render_template('includes/addVeh.html') """
-
 @app.route('/Boys_page', methods=['GET', 'POST'])
 @login_required
 def boys_page():
