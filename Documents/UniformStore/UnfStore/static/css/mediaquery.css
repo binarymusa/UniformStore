@@ -44,9 +44,7 @@
     #side{ 
         display: none;    
     }
-    #menu{
-        display: none;
-    }
+    
     #rowcalc{
         margin-right: 15px;
     }
@@ -90,7 +88,5 @@
     .payment-form,#container2{
         width: 325px;
     }
-    #menu{
-        display: none;
-    }
+    
 }
