@@ -208,7 +208,6 @@ def cart_page():
       
       for item in my_cart:         
          outfit = item.outfit  # Access the associated outfit object via the relationship
-         total_price = 0
          # Add the details of the outfit to the list
          cart_fit_details.append({
             'id': outfit.id,
@@ -218,8 +217,7 @@ def cart_page():
             'outfit_image': outfit.image_link
          })
 
-         total_price += outfit.price
-         print(total_price)
+      Subtotals = sum(item.get('price', 0) for item in cart_fit_details)
 
    if request.method == 'POST':
       item = request.form.get('remove_added_fit')
@@ -252,7 +250,7 @@ def cart_page():
             flash('Not enough money to purchase', category='danger')
             return redirect(url_for('cart_page')) """
 
-   return render_template('includes/cart.html', cart_fit_details=cart_fit_details)
+   return render_template('includes/cart.html', cart_fit_details=cart_fit_details, Subtotals=Subtotals)
 
 @app.route('/my_orders', methods=['GET', 'POST'])
 @login_required
