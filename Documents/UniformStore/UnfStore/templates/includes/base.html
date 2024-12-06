@@ -25,9 +25,6 @@
                     <a class="navbar-brand d-lg-none d-sm-none" href="">School Uniforms</a>
             
                     <div class="collapse navbar-collapse text-black font-monospace" id="navbarNav">
-
-                       
-
                         <div class="container col-1">
                             <ul class="navbar-nav"  id="menu">
                                 <li class="nav-item dropdown ">
@@ -57,7 +54,7 @@
 
                         <div class="container col-6" style="display: inline-block;">
                             <ul class="navbar-nav p-1">
-                                <a class="navbar-brand text-white pe-3" href="{{url_for('boys_page')}}" id="light1" style="border-right: 1px solid white;">Boys</a> 
+                                <a class="navbar-brand text-white pe-3" href="{{url_for('views.boys_page')}}" id="light1" style="border-right: 1px solid white;">Boys</a> 
                                 <div class="bg-white"></div>
                                 
                                 <a class="navbar-brand text-white" href="{{url_for('girls_page')}}" id="light2">Girls</a>  
@@ -92,7 +89,7 @@
                     <div class="collapse navbar-collapse text-black font-monospace" id="navbarNav">
                         <div class="container-fluid border">
                             <ul class="navbar-nav p-1">
-                                <a class="navbar-brand text-white" href="">School Uniforms`</a>
+                                <a class="navbar-brand text-white" href="">School Uniforms</a>
                             </ul>
                         </div>
                     </div>           
@@ -114,7 +111,7 @@
             {% endif %}
         {% endwith %}
         
-        <main class="font-monospace">
+        <main class="font-mono">
             {% block content %}
 
             {% endblock %}

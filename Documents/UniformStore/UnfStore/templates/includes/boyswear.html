@@ -4,10 +4,11 @@
 {% endblock %}
 
 {% block content %}
-  <div class="d-flex font-monospace text-white" style="margin: 8vh 11%;" >
-    <div class="container row ps-lg-3" id="rowcalc">
+  <div class="text-white" style="margin: 8vh 11%;" >
+    <div class="row ps-lg-3" id="rowcalc">
       {% for outfit in outfit_by_gender['Male'] %}
        {% include 'includes/fits_modal.html' %}
+       
         <div class="col-lg-3 mx-lg-auto m-lg-1" style="border: 2px solid #5959a3; " >
           <div class="booking-cards w-100 my-1 text-white rounded">
             <div class="bg-dark-subtle text-dark" style="height: 220px;">
@@ -17,7 +18,6 @@
             <div class="booking-card text-center py-3 rounded-1 onhover text-dark">
               <p><strong>gender:</strong> {{ outfit.gender }} </p>
               <p><strong>category:</strong> {{ outfit.category }}  </p>
-              <!-- <p><strong>description:</strong> {{ outfit.description }} </p>               -->
               <p><strong>price:</strong> Ksh. {{ outfit.price }}  </p>
               
                 <!-- <p class="text-warning"><strong>units:</strong> None </p> -->
@@ -37,5 +37,6 @@
         {% endif %}
 
       {% endfor %}
-  </div>
+      </div>
+  </div>  
 {% endblock %}      

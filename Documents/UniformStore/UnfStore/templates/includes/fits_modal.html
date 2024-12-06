@@ -14,7 +14,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <form method="post" action="{{url_for('boys_page')}}">
+          <form method="post" action="{{url_for('views.boys_page')}}">
             <input id="order_fit" name="order_fit" type="hidden" value="{{outfit.id}}">  
             <button type="submit" class="btn btn-primary">Add order</button>
           </form>
@@ -43,7 +43,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         
-        <form method="post" action="{{url_for('boys_page')}}">
+        <form method="post" action="{{url_for('views.boys_page')}}">
           <input id="added_fit" name="added_fit" type="hidden" value="{{outfit.id}}">
 
           <button type="submit" class="btn btn-primary">Add to cart</button>

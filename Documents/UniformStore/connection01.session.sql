@@ -4,7 +4,8 @@
 SELECT * FROM outfits
 -- DESCRIBE cart;
 -- SELECT * FROM outfits WHERE 
--- DELETE FROM outfits WHERE
+-- DELETE FROM outfits WHERE id= 18
+-- DELETE FROM outfits WHERE id IN (18, 19);
 -- UPDATE outfits SET 'image_link' = WHERE id = 30
 
 /* UPDATE outfits

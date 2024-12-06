@@ -146,6 +146,7 @@ input[type="submit"]:hover {
 }
 #bodyclr{
     background-color: rgb(233, 231, 227);
+    font-family: monospace;
 }
 #bodyclr.white{
     background-color: rgb(224, 224, 224);

@@ -1,13 +1,23 @@
-from UnfStore import app,db
-from flask import redirect, url_for, render_template, flash, session,request
+from UnfStore import app,db,api
+from flask import redirect, url_for, render_template, flash, session,request, jsonify, Blueprint
+from flask_restful import Resource,abort
 from flask_login import login_user, logout_user, login_required, current_user
 from UnfStore.models import User, Outfits, Cart, Orders
 from sqlalchemy import or_, and_
+# from intasend import APIService - -  -
 import re
 import time
 
+views_blueprint = Blueprint('views', __name__)
+def fits_by_gender():
+   fits = ['Male', 'Female', 'Unisex']
+   # Using dictionary comprehension to store the results for each fit type
+   outfit_by_gender = {gfit: Outfits.query.filter_by(gender=gfit).all() for gfit in fits}
+   return outfit_by_gender
+
 @app.route('/')
 @app.route('/login_page', methods=['GET', 'POST'])
+# @views_blueprint.route('/login_page', methods=['GET', 'POST'])
 def login_page():
    if request.method == 'POST':
       username = request.form['username']
@@ -25,7 +35,7 @@ def login_page():
          else:
             flash(f'Login successful', category='success')
             time.sleep(2)
-            return redirect(url_for('boys_page'))
+            return redirect(url_for('views.boys_page'))
       else:
          flash(f'Incorrect username or Password', category='danger')
          return redirect(url_for('login_page'))
@@ -61,8 +71,7 @@ def signup_page():
                db.session.commit()
 
                login_user(new_user)
-               flash(f'signup successful', category='success') 
-               time
+               flash(f'signup successful', category='success')  
                return redirect(url_for('boys_page'))     
          except:
             flash('an error occured', category='danger')
@@ -71,9 +80,6 @@ def signup_page():
    else:
       return render_template('signup.html')
 
-# @app.route('/Admin_welcome_page')
-# def admin_welcome():
-#    return render_template('includes/welcome_adm.html')
 
 @app.route('/Admin_page', methods=['GET' , 'POST'])
 @login_required
@@ -88,11 +94,7 @@ def admin_page():
          Orders.query.all(), 
          Outfits.query.all()
       )
-      fits = ['Male', 'Female']
-
-      # Using dictionary comprehension to store the results for each car type
-      outfit_by_gender = {gfit: Outfits.query.filter_by(gender=gfit).all() for gfit in fits}
-      print(outfit_by_gender)
+      fits_by_gender()
 
    if request.method == 'POST':
       user_to_delete = request.form.get('user_delete')
@@ -114,17 +116,13 @@ def admin_page():
          else:
             flash('deletion unsuccesful', category='danger')
 
-   return render_template('includes/admin.html', query_items = query_items, outfit_by_gender=outfit_by_gender )
+   return render_template('includes/admin.html', query_items = query_items, outfit_by_gender=fits_by_gender())
 
-@app.route('/Boys_page', methods=['GET', 'POST'])
+# @app.route('/Boys_page', methods=['GET', 'POST'])
+@views_blueprint.route('/Boys_page', methods=['GET', 'POST'])
 @login_required
 def boys_page():
-   fits = ['Male', 'Female']
-
-   # Using dictionary comprehension to store the results for each car type
-   outfit_by_gender = {gfit: Outfits.query.filter_by(gender=gfit).all() for gfit in fits}
-   print(outfit_by_gender)
-   
+   fits_by_gender() 
    if request.method == 'POST':
       item = request.form.get('added_fit') 
       item2 = request.form.get('order_fit') 
@@ -148,7 +146,103 @@ def boys_page():
          else:
             flash('Order not added', category='danger')
 
-   return render_template('includes/boyswear.html', outfit_by_gender=outfit_by_gender)
+   return render_template('includes/boyswear.html', outfit_by_gender=fits_by_gender())
+
+# API resource
+class OutfitResource(Resource):
+   def get(self, outfit_id=None):
+      if outfit_id:
+         outfit = Outfits.query.filter_by(id=outfit_id).first()
+         if outfit:
+            return jsonify({
+               'id': outfit.id,
+               'name': outfit.category,
+               'gender': outfit.gender,
+               'price': outfit.price,
+            })
+         return jsonify({'message': 'Outfit not found'}), 404
+      else:
+         outfits = Outfits.query.all()
+         return jsonify([
+            {'id': outfit.id, 'name': outfit.category, 'gender': outfit.gender, 'price': outfit.price}
+            for outfit in outfits
+         ])
+
+   def post(self):
+      data = request.get_json()      
+      if 'category' not in data or 'gender' not in data or 'price' not in data:
+         return jsonify({'message': 'Missing data'}), 400
+      
+      new_outfit = Outfits(
+         category=data['category'],
+         gender=data['gender'],
+         price=data['price'],
+         description=data['description'],
+         image_link=data['image_link']
+      )
+      try:
+         db.session.add(new_outfit)
+         db.session.commit()
+         return jsonify({'message': 'Outfit added successfully'}), 201
+      except Exception as e:
+        print(f"Error adding outfit: {str(e)}")
+        return jsonify({'message': 'An error occurred while adding the outfit'}), 500
+   
+   def put(self, outfit_id=None):
+      if outfit_id:
+         outfit = Outfits.query.filter_by(id=outfit_id).first()
+         if outfit:
+            data = request.get_json()
+            # Update outfit properties based on the received JSON data
+            outfit.category = data.get('category', outfit.category)
+            outfit.gender = data.get('gender', outfit.gender)
+            outfit.price = data.get('price', outfit.price)
+            outfit.description = data.get('description', outfit.description)
+            outfit.image_link = data.get('image_link', outfit.image_link)
+            
+            try:
+               db.session.commit()
+               return jsonify({'message': 'Outfit updated successfully'}), 200
+            except Exception as e:
+               print(f'error: {e}')               
+         else:
+            return jsonify({'message': 'Outfit not found'}), 404
+      else:
+         return jsonify({'message': 'Invalid request'}), 400
+   
+   def patch(self, outfit_id=None):
+      if outfit_id:
+         outfit = Outfits.query.filter_by(id=outfit_id).first()
+         if outfit:
+            data = request.get_json()
+            outfit.category = data.get('category', outfit.category)
+            outfit.gender = data.get('gender', outfit.gender)
+            outfit.price = data.get('price', outfit.price)
+            outfit.description = data.get('description', outfit.description)
+            outfit.image_link = data.get('image_link', outfit.image_link)
+
+            db.session.commit()
+            return jsonify({'message': 'Outfit updated successfully'})
+         else:
+            return jsonify({'error': 'Outfit not found'}), 404
+      else:
+         return jsonify({'error': 'Outfit ID is required'}), 400
+   
+   def delete(self, outfit_id=None):
+      if outfit_id:
+         outfit = Outfits.query.filter_by(id=outfit_id).first()
+         if outfit:
+            db.session.delete(outfit)
+            db.session.commit()
+            return jsonify({'message': 'Outfit deleted successfully'})
+         else:
+               return jsonify({'error': 'Outfit not found'}), 404
+      else:
+         return jsonify({'error': 'Outfit ID is required'}), 400
+
+
+# Register the API resources
+api.add_resource(OutfitResource, '/api/outfits', '/api/outfits/<int:outfit_id>')
 
 @app.route('/Girls_page', methods=['GET', 'POST'])
 @login_required
@@ -164,7 +258,7 @@ def girls_page():
 
 @app.route('/mycart_page', methods=['GET', 'POST'])
 @login_required
-def cart_page():
+def cart_page():   
    cart_fit_details = []
    if request.method == 'GET':
       my_cart = Cart.query.filter_by(user_id=current_user.id).all()
@@ -215,6 +309,7 @@ def cart_page():
             return redirect(url_for('cart_page')) """
 
    return render_template('includes/cart.html', cart_fit_details=cart_fit_details, Subtotals=Subtotals)
+
 
 @app.route('/my_orders', methods=['GET', 'POST'])
 @login_required
